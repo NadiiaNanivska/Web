@@ -1,0 +1,18 @@
+.home-title {
+    margin: 30px 30px 40px 30px !important;
+  }
+  
+  .home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-form {
+    width: 30rem;
+  }
+  
+  .home-buttons {
+    margin: 10px;
+  }
+  
