@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  server-1:
+    image: server_image
+
+  server-2:
+    image: server_image
+
+  nginx:
+    build: ./load-balancer
+    ports:
+      - "8081:80"
+    depends_on:
+      - server-1
+      - server-2
