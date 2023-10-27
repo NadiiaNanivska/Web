@@ -3,8 +3,6 @@ version: '3'
 services:
   server-1:
     image: server_image
-    # environment:
-    #   SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/web_db
 
   server-2:
     image: server_image
