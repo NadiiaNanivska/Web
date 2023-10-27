@@ -6,7 +6,7 @@ export const createTask = async (taskRequest, uniqueId) => {
       headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }});
-      return response.data;
+      return {'data': response.data, 'status': response.status};
 };
 
 export const getTaskHistory = async () => {

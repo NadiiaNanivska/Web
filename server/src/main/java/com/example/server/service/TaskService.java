@@ -35,7 +35,6 @@ public class TaskService {
     private final YourWebSocketHandler webSocketHandler;
     private final String USER_NOT_FOUND = "User is not found";
     private final String TASK_NOT_FOUND = "Task is not found or cancelled";
-    private final String CALCULATION_ERROR = "Error occurred during calculation";
 
     public ResponseEntity<?> getTasksByUserId(String username) {
         logger.info("Отримано запит на отримання списку завдань для користувача {}", username);
@@ -65,7 +64,7 @@ public class TaskService {
                     .secondFactor(task.getSecondFactor().toString())
                     .build(), HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(new CustomResponse(CALCULATION_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public ResponseEntity<?> cancelTask(String uniqueId) {
@@ -74,7 +73,7 @@ public class TaskService {
         if (calculationThread != null && !calculationThread.isInterrupted()) {
             calculationThread.interrupt();
             calculationThreads.remove(uniqueId);
-            return new ResponseEntity<>(new CustomResponse("Task is cancelled"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new CustomResponse("Task is cancelled"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new CustomResponse(TASK_NOT_FOUND), HttpStatus.NOT_FOUND);
     }
@@ -106,7 +105,7 @@ public class TaskService {
         List<Long> factors = new ArrayList<>();
         long sqrtN = (long) sqrt(number);
         while (number % 2 == 0) {
-            factors.add(Long.valueOf(2l));
+            factors.add(2L);
             number = number / 2;
             checkThreadState();
         }

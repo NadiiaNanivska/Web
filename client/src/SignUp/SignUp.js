@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Typography, notification, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import {validatePasswordMatch, getErrorMessage} from '../Utils';
+import {validatePasswordMatch, getErrorMessage, validatePassword, validateEmail} from '../Utils';
 import {registerUser} from '../Requests/AuthenticationRequests';
 import './SignUp.css';
  
@@ -56,6 +56,7 @@ function SignUp() {
               required: true,
               message: 'Please input your email!',
             },
+            validateEmail
           ]}
         >
           <Input type="email" placeholder="Email"/>
@@ -68,6 +69,7 @@ function SignUp() {
               required: true,
               message: 'Please input your password!',
             },
+            validatePassword
           ]}        
         >
           <Input.Password placeholder="Password"/>
@@ -80,7 +82,7 @@ function SignUp() {
               required: true,
               message: 'Please input confirm password!',
             },
-            validatePasswordMatch,
+            validatePasswordMatch
           ]}
         >
           <Input.Password placeholder="Confirm password"/>

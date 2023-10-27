@@ -12,6 +12,14 @@ export const validatePasswordMatch = ({ getFieldValue }) => ({
   },
 });
 
+export const validateEmail = () => ({
+  validator(_, value) {
+    if (/^[A-Za-z0-9+_.-]+@(.+)$/.test(value)) {
+      return Promise.resolve();
+    }
+    return Promise.reject(new Error('Invalid email'));
+  },
+});
 
 export const validatePassword = () => ({
   validator(_, value) {

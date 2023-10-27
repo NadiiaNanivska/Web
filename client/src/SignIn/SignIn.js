@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Typography, message, notification } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { getErrorMessage, validatePassword } from '../Utils';
+import { getErrorMessage, validatePassword, validateEmail } from '../Utils';
 import { loginUser } from '../Requests/AuthenticationRequests';
 import './SignIn.css';
 
@@ -55,6 +55,7 @@ function SignIn() {
               required: true,
               message: 'Please input your email!',
             },
+            validateEmail
           ]}
         >
           <Input type="email" placeholder="Email" />

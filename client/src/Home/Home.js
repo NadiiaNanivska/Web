@@ -25,9 +25,9 @@ function HomePage() {
 
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('accessToken');
+        const storedToken = localStorage.getItem('refreshToken');
         if (!isTokenValid(storedToken)) {
-            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
             history('/signin');
         }
     }, []);
@@ -61,9 +61,11 @@ function HomePage() {
                 const messageData = parseInt(event.data);
                 setTaskProgress(messageData);
             };
-            const data = await createTask(values, newUniqueId);
+            const result = await createTask(values, newUniqueId);
+            if(result.status === 201) {
+                setResult(`Calculated successfully: Factors of ${result.data.inputValue} are ${result.data.firstFactor} and ${result.data.secondFactor}`);
+            }
             setActiveTaskCount(activeTaskCount - 1);
-            setResult(`Calculated successfully: Factors of ${data.inputValue} are ${data.firstFactor} and ${data.secondFactor}`);
         } catch (error) {
             socket.close();
         }
@@ -74,7 +76,7 @@ function HomePage() {
     const handleCancelTask = async () => {
         try {
             const data = await cancelTask(uniqueId);
-            if(data.status === 204) {
+            if(data.status === 200) {
                 socket.close();
                 setActiveTaskCount(activeTaskCount - 1);
             }

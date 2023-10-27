@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, List, Col, Row, message } from 'antd';
-import { getTaskHistory } from './Requests/TaskRequests';
+import { getTaskHistory } from '../Requests/TaskRequests';
 
 function TaskHistory({ visible, onClose }) {
     const [taskHistory, setTaskHistory] = useState([]);
